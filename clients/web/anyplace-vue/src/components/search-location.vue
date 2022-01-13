@@ -1,4 +1,6 @@
 <template>
+  <!-- TODO rename search bar -->
+
 <!--  <div v-for="building in filteredList" :key="building" v-text="building.name">
   </div>-->
 
@@ -39,9 +41,15 @@ export default {
   components: {building},
   data() {
 
-    return {
-      search: '',
 
+
+    return {
+      // UNIQUE ELEMENTS:
+      /** search box. on mobile is hidden when not in use. */
+      // TODOc.. others.. import from Home.vue
+   //  elInputSearch: HTMLInputElement = this.$refs["input-search"] as HTMLInputElement,
+
+      search: '',
     }
 
   },
@@ -55,9 +63,13 @@ export default {
     isScreenMediumOrSmall() {
       return document.body.clientWidth < SCREEN_SIZE_MEDIUM
       // if (document.body.clientWidth < SCREEN_SIZE_MEDIUM){
+      // TODO: LOG.D
+      // class LOG: with methods: { LEVEL=2;
+    //}
+      // LOG.D1.. LOG.D2(msg)
+      //    LOG.D3("The size of your screen is less than medium")
       //console.log("The size of your screen is less than medium")
       // }
-
     },
     isHiddenInputSearchOnMobile() {
       // return "input-search".classList.contains("d-none")
@@ -66,24 +78,22 @@ export default {
     },
     showInputSearchOnMobile() {
       //return "input-search".classList.remove("d-none")
-      return this.$refs["input-search"].classList.remove("d-none")
+      //return
+      this.$refs["input-search"].classList.remove("d-none")
     },
     hideInputSearchOnMobile() {
       // return "input-search".classList.add("d-none")
       // return  this.check=false;
-      return this.$refs["input-search"].classList.add("d-none")
-
-
+      //return
+      this.$refs["input-search"].classList.add("d-none")
     },
 
-    handleBlur() {
+    handleBlur() { // focus out exmape... we talked..
       if (this.isScreenMediumOrSmall()) {
         this.hideInputSearchOnMobile()
       }
     },
     searchButtonClicked() {
-
-
       if (this.isScreenMediumOrSmall()) {
         if (this.isHiddenInputSearchOnMobile()) {
           this.showInputSearchOnMobile();
@@ -99,6 +109,8 @@ export default {
         // trySearch();
       }
     },
+
+     // SEARCH AUTOCOMPLETE LIST etc LATER!
     filteredList() {
       return this.places.filter((building) => {
         return building.name.match(this.search);

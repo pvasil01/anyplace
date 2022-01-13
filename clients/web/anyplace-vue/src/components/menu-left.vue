@@ -1,8 +1,10 @@
 <template>
-  <div id="menu-left" class="menu-off menu-appearance">
+
+  <button id="button-menu-left" class="input-group-text bg-white" @click="showMenu"><i class="fas fa-bars" ></i></button>
+  <div id="menu-left" ref="menu-left" class="menu-off menu-appearance">
     <div class="d-flex justify-content-between pt-3">
       <h3 class="fw-bold align-self-center font-monospace">Architect</h3>
-      <button id="button-close-menu-left" class="btn-close" aria-label="Close"></button>
+      <button @click="hideMenu" id="button-close-menu-left" class="btn-close" aria-label="Close"></button>
     </div>
     <hr class="pt-0 text-muted">
     <div class="d-flex justify-content-start pt-1 d-grid gap-2 col mx-auto">
@@ -68,7 +70,31 @@
 
 <script>
 export default {
-  name: "menu-left"
+  name: "menu-left",
+  data() {
+    return {
+      isShown:false
+    }
+  },
+  methods: {
+    showMenu(){
+      console.log("before button was clicked to open  was set to  " +this.isShown)
+
+       this.isShown=true;
+      console.log("clicked the button to open menu and now it is se to  " +this.isShown)
+      this.$refs["menu-left"].style.display="block"
+
+    },
+    hideMenu(){
+      console.log("before button was clicked to hide  was set to  " +this.isShown)
+
+      this.isShown=false;
+      console.log("clicked the button to close menu and now it is se to  " +this.isShown)
+      this.$refs["menu-left"].style.display="none"
+
+    }
+
+  }
 }
 </script>
 

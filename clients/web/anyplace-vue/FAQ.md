@@ -1,5 +1,4 @@
-
-## PhpStorm
+## PhpStorm / IntelliJ
 
 
 #### Run project locally:

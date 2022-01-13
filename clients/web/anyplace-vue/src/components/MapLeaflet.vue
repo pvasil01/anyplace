@@ -30,6 +30,7 @@ import Building from "@/components/building.vue";
   mounted() {
    // this.bindLeafletOSM(); // WAY1
      this.bindLeafletWithMapBox();  // WAY2
+    // SHOW SPACES....
   },
 
     beforeDestroy() {

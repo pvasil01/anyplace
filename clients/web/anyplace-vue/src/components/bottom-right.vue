@@ -1,5 +1,6 @@
 <template>
-  <div id="wrapper-actions" class="btn-group-vertical d-none" role="group">
+  <!-- ACTION BUTTONS rename -->
+  <div v-show="isShown" id="wrapper-actions" ref="wrappers-actions" class="btn-group-vertical" role="group">
     <button id="button1" class="btn mb-3 btn-light circle-icon" type="button">
       <i class="fas fa-map-marked-alt fa-2x"></i>
     </button>
@@ -14,7 +15,7 @@
     </button>
   </div>
   <div class="d-flex justify-content-end my-2">
-    <button id="button-toggle-actions" class="btn btn-primary circle-icon" type="button">
+    <button @click="showButtons" id="button-toggle-actions" class="btn btn-primary circle-icon" type="button">
       <i class="fas fa-angle-double-up fa-2x"></i>
     </button>
   </div>
@@ -22,8 +23,49 @@
 
 <script>
 export default {
-  name: "bottom-right"
+  name: "bottom-right",
+  data (){
+    return {
+      isShown:false
+    }
+  },
+  methods: {
+    buttonsHidden(){
+      /*if(this.$refs["wrapper-actions"].classList.contains("d-none")){
+        console.log("it contains d-none ")
+
+      }*/
+      return this.$refs["wrappers-actions"].classList.contains("d-none")
+    },
+
+    showButtons() {
+
+
+      if (this.isShown){
+        this.isShown=false;
+      }
+      else {
+        this.isShown = true;
+      }
+
+      }
+
+
+    }
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
 </script>
 
 <style scoped>

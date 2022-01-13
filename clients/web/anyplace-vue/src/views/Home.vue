@@ -2,6 +2,20 @@
 
   <div class="home">
 
+    <!--
+    {{ call method foo}}
+    {{places[0]}}
+
+    NEVER say buildings. ONLY spaces. (space is vessel or building)
+    places: spaces? (rename to spaces)
+    - fetch spaces:
+      - exists? use cache. print msg from cache
+      - else: axios:
+          - store in cache: localhost? vuex?? something else?)
+    - settings:
+      - primitive/simple for now
+         - clear all cache (deletes spaces..)
+    -->
     <map-leaflet :places="places"></map-leaflet>
     <div class="container-fluid">
       <!-- TOP ROW: button-menu-left, search-box, profile-menu -->
@@ -11,15 +25,16 @@
           <!--  MAIN-MENU:     -->
           <div class="btn-group " role="group" id="mobLeftIcons">
             <div id="wrapper-menu-search" class="input-group">
-              <button id="button-menu-left" class="input-group-text bg-white"><i class="fas fa-bars"></i></button>
-              <!--  menu-left content: -->
 
+              <!-- TODO 0. FINALISE TEMPLATE COMPONENTS. -->
+
+<!--              <button id="button-menu-left" class="input-group-text bg-white"><i class="fas fa-bars"></i></button>
+              -->
+              <!--  menu-left content: -->
               <menu-left> </menu-left>
 
               <!--SEARCH INPUT:-->
               <search-location :places="places"></search-location>
-
-
 
             </div>
           </div>
@@ -76,20 +91,33 @@ import axios from "axios"; // @ is an alias to /src
       places: null
     }
   },
+
+
   mounted() {
 
-       // enableUiWithoutVue() // TODO break it up and do it with vue
+   // console log: HOme component mounted....
+
+     enableUiWithoutVue() // TODO break it up and do it with vu
+    // BASE_URL
+    // PROTOCOL: https
+    //
     axios
         .post('https://ap.cs.ucy.ac.cy:44/api/mapping/space/public',{})
       //   .then(data=>console.log(data.data.spaces))
-        .then(data=> (this.places=data.data.spaces))
-
-
+        .then(data=> {
+          this.places = data.data.spaces;
+          console.log(data);
+          // LOG.D
+          console.log("fetched spaces done. fetched #" + this.places.length);
+          // ....
+        }
+        )
         .catch(err=>console.log(err))
 
   },
 
   methods: {
+    // foo: called foo. places ios null?, place==null
   }
 })
 
@@ -105,28 +133,34 @@ function enableUiWithoutVue(): void {
   //const SCREEN_SIZE_MEDIUM=process.env.VUE_APP_SCREEN_SIZE_MEDIUM
 
   // UNIQUE ELEMENTS:
-  /** search box. on mobile is hidden when not in use. */
+
+/*
+
+  /!** search box. on mobile is hidden when not in use. *!/
   const elInputSearch: HTMLInputElement = document.getElementById('input-search') as HTMLInputElement
-  /** bars button that shows the left menu ({@link elMenuLeft}) */
+  /!** bars button that shows the left menu ({@link elMenuLeft}) *!/
   const elButtonOpenMenuLeft: HTMLButtonElement = document.getElementById('button-menu-left') as HTMLButtonElement
-  /** Left full-height menu for app-specific options (e.g. anyplace architect) */
+  /!** Left full-height menu for app-specific options (e.g. anyplace architect) *!/
   const elMenuLeft: HTMLDivElement = document.getElementById('menu-left') as HTMLDivElement
-  /** button that closes {@link elMenuLeft} */
+  /!** button that closes {@link elMenuLeft} *!/
   const elButtonCloseMenuLeft: HTMLButtonElement = document.getElementById('button-close-menu-left') as HTMLButtonElement
-  /** When clicked is submits a search query */
+  /!** When clicked is submits a search query *!/
   const elButtonSearch: HTMLButtonElement = document.getElementById('button-search') as HTMLButtonElement
 
-  /** Wrapper of the **top-left** menu-search component that consists of:
+  // TODO in search component...
+  /!** Wrapper of the **top-left** menu-search component that consists of:
    *    - bars-menu button {@link elButtonOpenMenuLeft},
    *    - search input {@link elInputSearch}, and
    *    - search button {@link elButtonSearch}
-   */
+   *!/
   const elWrapperMenuAndSearch: HTMLDivElement = document.getElementById('wrapper-menu-search') as HTMLDivElement
 
-  /** Wrapper for the bottom-right buttons */
+  /!** Wrapper for the bottom-right buttons *!/ // TODO in action component
   const elWrapperActions: HTMLDivElement = document.getElementById('wrapper-actions') as HTMLDivElement
-  /** Toggles the bottom-right action buttons */
+  /!** Toggles the bottom-right action buttons *!/
   const elButtonToggleActions: HTMLButtonElement = document.getElementById('button-toggle-actions') as HTMLButtonElement
+*/
+
 
 /*
 
@@ -178,12 +212,21 @@ function enableUiWithoutVue(): void {
 
   // TOGGLE LEFT MENU (app-specific menu)
 
+
+/*
+
   elButtonOpenMenuLeft.addEventListener("click", function (event) {
     elMenuLeft.style.display = "block";
   });
+
+*/
+/*
+
   elButtonCloseMenuLeft.addEventListener("click", function (event) {
     elMenuLeft.style.display = "none";
   });
+*/
+
 
 
   /** When loosing focus from the wrapper, or its children:
@@ -191,6 +234,8 @@ function enableUiWithoutVue(): void {
    * - {@link elInputSearch}
    * - {@link elButtonSearch }
    */
+
+
 /*
   elWrapperMenuAndSearch.addEventListener('focusout', (function (event) {
     // when the event concerns any other object than the child of the wrapper
@@ -199,16 +244,18 @@ function enableUiWithoutVue(): void {
     }
   }));
 */
+/*
 
-  /** If {@link elInputSearch } has any text, then perform a query. */
+  /!** If {@link elInputSearch } has any text, then perform a query. *!/
   function trySearch() {
     if (elInputSearch.value) {
       // TODO: implement query
       console.log("query:'" + elInputSearch.value + "'")
     }
   }
+*/
 
-  /** When clicked on {@link elButtonToggleActions }, show/hidden {@link elWrapperActions }  */
+ /* /!** When clicked on {@link elButtonToggleActions }, show/hidden {@link elWrapperActions }  *!/
   elButtonToggleActions.addEventListener("click", function () {
     if (elWrapperActions.classList.contains("d-none")) {  // if hidden show
       elWrapperActions.classList.remove("d-none")
@@ -216,12 +263,14 @@ function enableUiWithoutVue(): void {
       elWrapperActions.classList.add("d-none");
     }
   });
-
+*/
+/*
   const myModalEl: HTMLElement = document.getElementById('modal-user-account') as HTMLElement;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   myModalEl.addEventListener('hidden.bs.modal', function () {
     // keyboard: false
   })
+*/
 
 }
 </script>
