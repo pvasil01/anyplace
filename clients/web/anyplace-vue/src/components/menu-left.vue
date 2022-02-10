@@ -78,18 +78,12 @@ export default {
   },
   methods: {
     showMenu(){
-      console.log("before button was clicked to open  was set to  " +this.isShown)
 
-       this.isShown=true;
-      console.log("clicked the button to open menu and now it is se to  " +this.isShown)
       this.$refs["menu-left"].style.display="block"
 
     },
     hideMenu(){
-      console.log("before button was clicked to hide  was set to  " +this.isShown)
 
-      this.isShown=false;
-      console.log("clicked the button to close menu and now it is se to  " +this.isShown)
       this.$refs["menu-left"].style.display="none"
 
     }

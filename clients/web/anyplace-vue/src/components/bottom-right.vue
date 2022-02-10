@@ -15,8 +15,8 @@
     </button>
   </div>
   <div class="d-flex justify-content-end my-2">
-    <button @click="showButtons" id="button-toggle-actions" class="btn btn-primary circle-icon" type="button">
-      <i class="fas fa-angle-double-up fa-2x"></i>
+    <button @click="isShown= !isShown ; showButtons" id="button-toggle-actions" class="btn btn-primary circle-icon" type="button">
+      <i ref="arrowButton" class="fas fa-angle-double-up fa-2x"></i>
     </button>
   </div>
 </template>
@@ -30,22 +30,22 @@ export default {
     }
   },
   methods: {
-    buttonsHidden(){
-      /*if(this.$refs["wrapper-actions"].classList.contains("d-none")){
-        console.log("it contains d-none ")
 
-      }*/
-      return this.$refs["wrappers-actions"].classList.contains("d-none")
-    },
 
     showButtons() {
 
 
-      if (this.isShown){
-        this.isShown=false;
+      if (!(this.isShown)){
+        this.$refs["arrowButton"].classList.add("fa-angle-double-up")
+
+
+
       }
       else {
-        this.isShown = true;
+        this.$refs["arrowButton"].classList.add("fa-angle-double-down")
+
+
+
       }
 
       }

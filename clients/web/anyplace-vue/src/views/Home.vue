@@ -16,7 +16,7 @@
       - primitive/simple for now
          - clear all cache (deletes spaces..)
     -->
-    <map-leaflet :places="places"></map-leaflet>
+    <map-leaflet :places="places" v-if="places"></map-leaflet>
     <div class="container-fluid">
       <!-- TOP ROW: button-menu-left, search-box, profile-menu -->
       <div class="row">
@@ -88,9 +88,31 @@ import axios from "axios"; // @ is an alias to /src
   },
   data() {
     return {
-      places: null
+      places: []
     }
   },
+
+  created() {
+    axios
+        .post('https://ap.cs.ucy.ac.cy:44/api/mapping/space/public',{})
+        //   .then(data=>console.log(data.data.spaces))
+        .then(data=> {
+              this.places = data.data.spaces;
+              console.log(data.data.spaces);
+              // console.log(this.places);
+              // LOG.D
+              console.log("fetched spaces done. fetched #" + this.places.length);
+
+              console.log("this is the entry of places at index 0" +  this.places[0].name)
+              console.log("this is the coord lat of places at index 0" +  this.places[0].coordinates_lat)
+              console.log("this is the coord lon of places at index 0" +  this.places[0].coordinates_lon)
+
+              // ....
+            }
+        )
+        .catch(err=>console.log(err))
+  },
+
 
 
   mounted() {
@@ -101,18 +123,7 @@ import axios from "axios"; // @ is an alias to /src
     // BASE_URL
     // PROTOCOL: https
     //
-    axios
-        .post('https://ap.cs.ucy.ac.cy:44/api/mapping/space/public',{})
-      //   .then(data=>console.log(data.data.spaces))
-        .then(data=> {
-          this.places = data.data.spaces;
-          console.log(data);
-          // LOG.D
-          console.log("fetched spaces done. fetched #" + this.places.length);
-          // ....
-        }
-        )
-        .catch(err=>console.log(err))
+
 
   },
 
